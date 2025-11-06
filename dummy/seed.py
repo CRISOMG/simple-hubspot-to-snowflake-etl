@@ -28,9 +28,9 @@ def get_industries():
 industries = get_industries()
 # --- Configuración ---
 load_dotenv()
-API_KEY = os.getenv("HUBSPOT_API_KEY")
+API_KEY = os.getenv("HUBSPOT_ACCESS_TOKEN")
 if not API_KEY:
-    raise EnvironmentError("No se encontró HUBSPOT_API_KEY en el archivo .env")
+    raise EnvironmentError("No se encontró HUBSPOT_ACCESS_TOKEN en el archivo .env")
 
 HEADERS = {"Authorization": f"Bearer {API_KEY}", "Content-Type": "application/json"}
 

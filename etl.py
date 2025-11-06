@@ -4,7 +4,7 @@ from dotenv import load_dotenv
 
 load_dotenv()  # Carga las variables del .env
 
-HUBSPOT_KEY = os.getenv("HUBSPOT_API_KEY")
+HUBSPOT_KEY = os.getenv("HUBSPOT_ACCESS_TOKEN")
 headers = {"Authorization": f"Bearer {HUBSPOT_KEY}"}
 
 # Endpoint para Deals
