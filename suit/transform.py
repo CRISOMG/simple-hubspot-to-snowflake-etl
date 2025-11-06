@@ -1,7 +1,11 @@
 import pandas as pd
+from .schemas import HubSpotDealObject, HubSpotContactObject
+from typing import List, Tuple
 
 
-def transform_data(deals_data, leads_data):
+def transform_data(
+    deals_data: List[HubSpotDealObject], leads_data: List[HubSpotContactObject]
+) -> Tuple[pd.DataFrame, pd.DataFrame]:
     print("Iniciando transformación...")
 
     # 1. Transformar Deals
@@ -9,16 +13,12 @@ def transform_data(deals_data, leads_data):
     for deal in deals_data:
         props = deal["properties"]
 
-        # --- NUEVA LÓGICA DE TRANSFORMACIÓN ---
         assoc_company_id = None
-        # Verificamos si la asociación a 'companies' existe
-        if "associations" in deal and "companies" in deal["associations"]:
-            try:
-                # Extraer el primer ID de compañía asociada
-                assoc_company_id = deal["associations"]["companies"]["results"][0]["id"]
-            except (KeyError, IndexError, TypeError):
-                assoc_company_id = None  # No se encontró asociación
-        # -------------------------------------
+
+        try:
+            assoc_company_id = deal["associations"]["companies"]["results"][0]["id"]
+        except:
+            pass
 
         deals_list.append(
             {
@@ -27,7 +27,7 @@ def transform_data(deals_data, leads_data):
                 "amount": props.get("amount"),
                 "stage": props.get("dealstage"),
                 "created_at": props.get("createdate"),
-                "associated_company_id": assoc_company_id,  # <-- NUEVA COLUMNA
+                "associated_company_id": assoc_company_id,
             }
         )
 
