@@ -2,7 +2,7 @@ import requests
 import os
 from dotenv import load_dotenv
 from typing import List, Tuple
-from .schemas import HubSpotDealObject, HubSpotContactObject, HubSpotApiResponse
+from schemas import HubSpotDealObject, HubSpotContactObject, HubSpotApiResponse
 
 load_dotenv()  # Carga las variables del .env
 

@@ -115,7 +115,7 @@ You must run these scripts in order.
 This script will populate your HubSpot sandbox with realistic test data (5 Companies, 15 Contacts, and 15 Deals). It randomly creates B2B deals (associated with a company) and B2C deals (associated only with a contact).
 
 ```bash
-python3 seed.py
+python3 suite/seed.py
 ```
 
 ### Step 2: Run the ETL
@@ -123,7 +123,7 @@ python3 seed.py
 This script connects to the HubSpot API, extracts the data you just created, transforms it with Pandas (capturing the `associated_company_id`), and loads it into `DEALS` and `LEADS` tables in Snowflake.
 
 ```bash
-python3 etl.py
+python3 suite/etl.py
 ```
 
 -----

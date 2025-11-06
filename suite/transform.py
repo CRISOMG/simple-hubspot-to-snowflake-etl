@@ -1,5 +1,5 @@
 import pandas as pd
-from .schemas import HubSpotDealObject, HubSpotContactObject
+from schemas import HubSpotDealObject, HubSpotContactObject
 from typing import List, Tuple
 
 
