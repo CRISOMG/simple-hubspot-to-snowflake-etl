@@ -64,13 +64,13 @@ This project uses the [Snowflake Connector for Python](https://docs.snowflake.co
 1.  Log in to your Snowflake account.
 2.  Find your account details. You will need your:
       * **User/Password**: Your login credentials.
-      * **Account Identifier**: The first part of your Snowflake URL (e.g., `RXXDNZQ-RH92607`).
+      * **Account Identifier**: The first part of your Snowflake URL.
       * **Warehouse, Database, and Schema**: The compute resource and data locations you want to use.
 3.  **Update `.env`:**
       * Fill in the following variables in your `.env` file based on your account:
-          * `SNOW_USER=CRISOMG`
+          * `SNOW_USER=USERNAME`
           * `SNOW_PASSWORD=YourPassword`
-          * `SNOW_ACCOUNT=RXXDNZQ-RH92607`
+          * `SNOW_ACCOUNT=XXXXX-XXXXXX`
           * `SNOW_WAREHOUSE=COMPUTE_WH`
           * `SNOW_DATABASE=SNOWFLAKE_LEARNING_DB`
           * `SNOW_SCHEMA=PUBLIC`
