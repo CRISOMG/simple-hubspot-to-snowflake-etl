@@ -1,3 +1,5 @@
 venv
+.venv
 connections.toml
 .env
+__pycache__

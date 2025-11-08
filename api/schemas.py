@@ -20,3 +20,7 @@ class TokenResponse(BaseModel):
 
     access_token: str
     token_type: str = "bearer"
+
+
+class LogInData(BaseModel):
+    email: EmailStr = Field(..., example="usuario@ejemplo.com")
