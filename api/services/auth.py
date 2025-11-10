@@ -8,8 +8,8 @@ from jose import JWTError, jwt
 from passlib.context import CryptContext
 from pydantic import EmailStr
 
-from .database import db
-from .schemas import TokenResponse
+from ..database import db
+from ..schemas import TokenResponse
 
 load_dotenv()
 

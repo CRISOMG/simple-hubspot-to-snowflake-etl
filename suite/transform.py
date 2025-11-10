@@ -8,7 +8,6 @@ def transform_data(
 ) -> Tuple[pd.DataFrame, pd.DataFrame]:
     print("Iniciando transformación...")
 
-    # 1. Transformar Deals
     deals_list = []
     for deal in deals_data:
         props = deal["properties"]
@@ -33,11 +32,9 @@ def transform_data(
 
     df_deals = pd.DataFrame(deals_list)
 
-    # Transformaciones básicas:
-    df_deals["amount"] = pd.to_numeric(df_deals["amount"]).fillna(0)  # Rellenar nulos
-    df_deals["created_at"] = pd.to_datetime(df_deals["created_at"])  # Convertir a fecha
+    df_deals["amount"] = pd.to_numeric(df_deals["amount"]).fillna(0)
+    df_deals["created_at"] = pd.to_datetime(df_deals["created_at"])
 
-    # 2. Transformar Leads
     leads_list = []
     for lead in leads_data:
         props = lead["properties"]
@@ -53,9 +50,8 @@ def transform_data(
         )
     df_leads = pd.DataFrame(leads_list)
 
-    # Transformaciones básicas:
     df_leads["created_at"] = pd.to_datetime(df_leads["created_at"])
-    df_leads["status"] = df_leads["status"].fillna("UNKNOWN")  # Rellenar nulos
+    df_leads["status"] = df_leads["status"].fillna("UNKNOWN")
 
     print("Transformación completa.")
     return df_deals, df_leads

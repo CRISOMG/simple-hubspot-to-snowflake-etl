@@ -26,7 +26,6 @@ def get_industries():
 
 
 industries = get_industries()
-# --- Configuración ---
 load_dotenv()
 API_KEY = os.getenv("HUBSPOT_ACCESS_TOKEN")
 if not API_KEY:
@@ -34,15 +33,12 @@ if not API_KEY:
 
 HEADERS = {"Authorization": f"Bearer {API_KEY}", "Content-Type": "application/json"}
 
-# Endpoints de la API V3
 COMPANIES_URL = "https://api.hubapi.com/crm/v3/objects/companies"
 CONTACTS_URL = "https://api.hubapi.com/crm/v3/objects/contacts"
 DEALS_URL = "https://api.hubapi.com/crm/v3/objects/deals"
 
-# Instancia de Faker
 faker = Faker()
 
-# Listas para guardar los IDs creados
 company_ids = []
 contact_ids = []
 
@@ -60,7 +56,7 @@ for _ in range(5):
 
     try:
         r = requests.post(COMPANIES_URL, headers=HEADERS, json=payload)
-        r.raise_for_status()  # Lanza error si la API falla
+        r.raise_for_status()
 
         company_id = r.json()["id"]
         company_ids.append(company_id)
@@ -69,7 +65,7 @@ for _ in range(5):
     except requests.exceptions.HTTPError as e:
         print(f"Error creando compañía: {e.response.text}")
 
-    time.sleep(0.4)  # Pausa para no saturar el rate limit de la API
+    time.sleep(0.4)
 
 # --- 2. Crear Contactos (y asociarlos a Compañías) ---
 print("\n--- Iniciando creación de Contactos ---")
@@ -118,7 +114,6 @@ for item in contact_ids:
     contact_id = item["contact_id"]
     company_id = item["company_id"]
 
-    # --- NUEVA LÓGICA DE DECISIÓN ---
     # Decidimos aleatoriamente si será B2B o B2C
     deal_type = random.choice(["B2B", "B2C"])
 

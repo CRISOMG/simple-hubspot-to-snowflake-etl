@@ -5,13 +5,12 @@ from dotenv import load_dotenv
 
 load_dotenv()
 
-# Carga las credenciales desde .env
 GMAIL_USER = os.getenv("GMAIL_USER")
 GMAIL_APP_PASSWORD = os.getenv("GMAIL_APP_PASSWORD")
 API_NAME = os.getenv("API_NAME")
 
 
-def send_magic_link_email(email_to: str, magic_link: str, user_name: str = "usuario"):
+def send_magic_link_email(email_to: str, magic_link: str):
     if not GMAIL_USER or not GMAIL_APP_PASSWORD:
         print("Error: GMAIL_USER o GMAIL_APP_PASSWORD no están en .env")
         return False

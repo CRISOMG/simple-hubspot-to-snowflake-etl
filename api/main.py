@@ -3,11 +3,10 @@ from dotenv import load_dotenv
 from fastapi import FastAPI, Depends, HTTPException, Security, status
 from fastapi.security import APIKeyHeader
 from pydantic import BaseModel, EmailStr, Field
-from .auth import create_magic_token, verify_magic_token, get_current_user
+from .services.auth import create_magic_token, verify_magic_token, get_current_user
 from .services.email import send_magic_link_email
 from .schemas import TokenResponse, LogInData
-from .services.snowflake import get_snowflake_connection
-from snowflake.connector import DictCursor
+from .services.snowflake import get_snowflake_b2b_vs_b2c_deals
 
 load_dotenv()
 
@@ -67,24 +66,5 @@ async def read_users_me(current_user: str = Depends(get_current_user)):
 
 @app.get("/metrics/snowflake/deals/b2b-vs-b2c")
 async def read_users_me(current_user: str = Depends(get_current_user)):
-    connection = get_snowflake_connection()
-
-    cursor = connection.cursor(DictCursor)
-    try:
-        cursor.execute(
-            """
-            SELECT
-                COUNT(CASE WHEN DEALS."associated_company_id" IS NOT NULL THEN 1 END) AS total_deals_b2b,
-                COUNT(CASE WHEN DEALS."associated_company_id" IS NULL THEN 1 END)     AS total_deals_b2c,
-                COUNT(*) AS total_deals
-            FROM
-                DEALS;
-            """
-        )
-        result = cursor.fetchone()
-    except Exception as e:
-        return e
-    finally:
-        cursor.close()
-
+    result = get_snowflake_b2b_vs_b2c_deals()
     return result

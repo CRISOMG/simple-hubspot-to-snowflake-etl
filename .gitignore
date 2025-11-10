@@ -3,3 +3,5 @@ venv
 connections.toml
 .env
 __pycache__
+.vscode
+.pytest_cache
