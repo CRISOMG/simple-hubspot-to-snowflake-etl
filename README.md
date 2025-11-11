@@ -217,6 +217,13 @@ python -m unittest ./api/tests/email_test.py -v
 python -m unittest ./api/tests/snowflake_test.py -v
 ```
 
+You can run all by:
+
+```bash
+python -m unittest discover -s api/tests -p "*_test.py" -v
+```
+
+
 -----
 
 ## 🚀 6. Run the API

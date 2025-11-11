@@ -15,3 +15,6 @@ curl -X GET "http://127.0.0.1:8000/users/me" \
 curl -X GET "http://127.0.0.1:8000/metrics/snowflake" \
      -H "Content-Type: application/json" \
      -H "Authorization: Bearer $JWT"
+
+
+python -m unittest discover -s api/tests -v -p "*_test.py"
